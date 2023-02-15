@@ -35,7 +35,7 @@ const MainFeed = ({ posts, handleLike }) => {
             src={post.imageUrl}
             alt=""
             className="absolute top-0 h-full w-full object-cover"
-            style={{ objectPosition: post.objectPosition }}
+            style={{ filter: post.filter }} // Add the style attribute to apply the filter
             onDoubleClick={() => handleLikeLocal(index)}
           />
           <div className="bg-white text-black absolute py-2 top-0 left-6 w-full">
