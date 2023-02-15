@@ -24,7 +24,7 @@ const MainFeed = ({ posts, handleLike }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {postsToShow.map((post, index) => (
         <div
           key={index}
