@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 const NewPost = ({ handleNewPost }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [imageDescription, setImageDescription] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("none");
   const [confirmation, setConfirmation] = useState("");
-  const [selectedFilter, setSelectedFilter] = useState("");
+
+  const imagePreviewRef = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,12 +21,18 @@ const NewPost = ({ handleNewPost }) => {
         },
         selectedFilter
       );
-      setConfirmation("Post created!");
       setImageUrl("");
       setImageDescription("");
-      setSelectedFilter("");
+      setSelectedFilter("none");
+      imagePreviewRef.current.style.backgroundImage = "";
+      setConfirmation("Your post has been submitted!");
     }
   };
+
+  // const handleImageUrlChange = (event) => {
+  //   setImageUrl(event.target.value);
+  //   imagePreviewRef.current.style.backgroundImage = `url(${event.target.value})`;
+  // };
 
   const filterOptions = [
     { name: "None", filter: "none" },
@@ -34,15 +42,15 @@ const NewPost = ({ handleNewPost }) => {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl m-auto">
+    <form onSubmit={handleSubmit} className="mt-[55px] max-w-2xl m-auto">
       {confirmation && (
         <div className="p-3 text-center">
           <p className="text-indigo-500 font-medium">{confirmation}</p>
         </div>
       )}
-      <div className="p-3">
+      <div className="p-1">
         <label
-          className="block text-gray-400 text-center font-noto-sans font-extrabold mb-2"
+          className="block text-gray-400 text-sm text-center font-noto-sans font-extrabold mb-2"
           htmlFor="image-url"
         >
           Enter an image URL
@@ -56,9 +64,29 @@ const NewPost = ({ handleNewPost }) => {
           required
         />
       </div>
-      <div className="p-3">
+      {imageUrl && (
+        <div className="p-3">
+          <div className="flex items-center justify-center h-[400px] border-x-[15px] border-black border-y-0 w-full">
+            <div className="relative h-full w-full">
+              <div
+                className="absolute top-0 left-0 h-full w-full"
+                style={{
+                  background: "black",
+                }}
+              >
+                <img
+                  src={imageUrl}
+                  alt={imageDescription}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="p-0">
         <label
-          className="block text-blue-700 text-center font-noto-sans font-extrabold mb-2"
+          className="block text-blue-700 text-center text-sm font-noto-sans font-extrabold mb-2"
           htmlFor="image-description"
         >
           Give it a name:
@@ -72,14 +100,12 @@ const NewPost = ({ handleNewPost }) => {
           required
         />
       </div>
-     
-      <div className="p-3">
+
+      <div className="p-1">
         <label
           className="block text-gray-400 text-center font-medium font-noto-sans font-bold mb-2"
           htmlFor="filter-select"
-        >
-         
-        </label>
+        ></label>
         <select
           id="filter-select"
           value={selectedFilter}
@@ -94,18 +120,9 @@ const NewPost = ({ handleNewPost }) => {
         </select>
       </div>
 
-      <div className="p-3">
+      <div className="p-0">
         <div className="h-[16] w-['41rem'] overflow-x-auto">
-          <div
-            className="h-['13rem'] flex"
-            // style={{
-            //   transform: `translateX(-${
-            //     filterOptions.findIndex(
-            //       (option) => option.filter === selectedFilter
-            //     ) * 100
-            //   }%)`,
-            // }}
-          >
+          <div className="h-['13rem'] flex">
             {imageUrl !== "" &&
               imageDescription !== "" &&
               filterOptions.map((option) => (

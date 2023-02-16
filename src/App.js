@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import MainFeed from "./components/MainFeed";
 import NewPost from "./components/NewPost";
 import Header from "./components/Header";
-import { FaHome, FaPlusSquare } from "react-icons/fa";
+import Navigation from "./components/Navigation";
 
 const App = () => {
   const [currentTab, setCurrentTab] = useState("Main Feed");
@@ -42,32 +42,13 @@ const App = () => {
         {showNewPost && <NewPost handleNewPost={handleNewPost} />}
         <MainFeed posts={posts} handleLike={handleLike} />
       </main>
-      <div className="bg-white p-6 flex justify-between items-center">
-        <nav className="flex">
-          <button
-            className={`${
-              currentTab === "Main Feed" ? "underline" : ""
-            } px-4 text-black font-medium hover:underline`}
-            onClick={() => {
-              setShowNewPost(false);
-              handleTabChange("Main Feed");
-            }}
-          >
-            <FaHome size="1.5em" />
-          </button>
-          <button
-            className={`${
-              currentTab === "New Post" ? "underline" : ""
-            } px-4 text-black font-medium hover:underline`}
-            onClick={() => {
-              setShowNewPost(!showNewPost);
-              handleTabChange("New Post");
-            }}
-            style={{ color: showNewPost ? "grey" : "black" }}
-          >
-            <FaPlusSquare size="1.5em" />
-          </button>
-        </nav>
+      <div className="bg-white p-3 flex fixed bottom-0 w-full justify-between content-between items-center border-t-2 border-neutral-200">
+        <Navigation
+          currentTab={currentTab}
+          handleTabChange={handleTabChange}
+          setShowNewPost={setShowNewPost}
+          showNewPost={showNewPost}
+        />
       </div>
     </div>
   );
