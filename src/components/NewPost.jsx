@@ -6,6 +6,7 @@ const NewPost = ({ handleNewPost }) => {
   const [selectedFilter, setSelectedFilter] = useState("none");
   const [confirmation, setConfirmation] = useState("");
 
+
   const imagePreviewRef = useRef();
 
   const handleSubmit = (event) => {
@@ -147,6 +148,8 @@ const NewPost = ({ handleNewPost }) => {
                   }}
                   onClick={() => setSelectedFilter(option.filter)}
                   className="mx-2 cursor-pointer"
+                  filter={option.filter}
+
                 />
               ))}
           </div>

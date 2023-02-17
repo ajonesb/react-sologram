@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
-const MainFeed = ({ posts, handleLike }) => {
+const MainFeed = ({ posts, handleLike, selectedFilter }) => {
   const [localPosts, setLocalPosts] = useState(
     JSON.parse(localStorage.getItem("posts")) || posts
   );
@@ -35,9 +35,15 @@ const MainFeed = ({ posts, handleLike }) => {
             src={post.imageUrl}
             alt=""
             className="absolute top-0 h-full w-full object-cover"
-            style={{ filter: post.filter }} // Add the style attribute to apply the filter
+            style={{ filter: post.filter }}
             onDoubleClick={() => handleLikeLocal(index)}
           />
+          {index === 0 && selectedFilter !== "none" && (
+            <div
+              className="absolute top-0 left-0 h-full w-full"
+              style={{ filter: selectedFilter }}
+            ></div>
+          )}
           <div className="bg-white text-black absolute p-2 top-0 w-full">
             <p className="text-xl font-noto-sans font-bold">{post.title}</p>
           </div>
@@ -59,6 +65,7 @@ const MainFeed = ({ posts, handleLike }) => {
           </div>
         </div>
       ))}
+
       {postsToShow.length < localPosts.length && (
         <div className="mb-4 p-6">
           <button

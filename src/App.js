@@ -25,8 +25,8 @@ const App = () => {
     setCurrentTab(tab);
   };
 
-  const handleNewPost = (newPost, filter) => {
-    setPosts([...posts, newPost, filter]);
+  const handleNewPost = (newPost) => {
+    setPosts([...posts, newPost]);
   };
 
   const handleLike = (index) => {
