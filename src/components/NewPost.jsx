@@ -5,29 +5,35 @@ const NewPost = ({ handleNewPost }) => {
   const [imageDescription, setImageDescription] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("none");
   const [confirmation, setConfirmation] = useState("");
-
+  const [loading, setLoading] = useState(false);
 
   const imagePreviewRef = useRef();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (imageUrl === "" || imageDescription === "") {
       alert("Both Image URL and Title are required!");
     } else {
-      handleNewPost(
-        {
-          imageUrl,
-          title: imageDescription,
-          isLiked: false,
-        },
-        selectedFilter
-      );
-      setImageUrl("");
-      setImageDescription("");
-      setSelectedFilter("none");
-      imagePreviewRef.current.style.backgroundImage = "";
-      // imagePreviewRef.current.style.filter = "none";
-      setConfirmation("Your post has been submitted!");
+      setLoading(true); // Set loading to true when the form is submitted
+      try {
+        await handleNewPost(
+          {
+            imageUrl,
+            title: imageDescription,
+            isLiked: false,
+          },
+          selectedFilter
+        );
+        setImageUrl("");
+        setImageDescription("");
+        setSelectedFilter("none");
+        // imagePreviewRef.current.style.backgroundImage = "";
+        setConfirmation("Your post has been submitted! Please refresh to view the post.");
+      } catch (error) {
+        console.error("Error submitting post:", error);
+      } finally {
+        setLoading(false); // Set loading back to false after the post request is completed
+      }
     }
   };
 
@@ -49,9 +55,14 @@ const NewPost = ({ handleNewPost }) => {
 
   return (
     <form onSubmit={handleSubmit} className="mt-[55px] max-w-2xl m-auto">
+      {loading && (
+        <div className="p-3 text-center">
+          <p className="text-indigo-500 font-medium">Processing your post...</p>
+        </div>
+      )}
       {confirmation && (
         <div className="p-3 text-center">
-          <p className="text-indigo-500 font-medium">{confirmation}</p>
+          <p className="text-emerald-600 font-medium text-md font-noto-sans font-extrabold">{confirmation}</p>
         </div>
       )}
       <div className="p-1">
@@ -149,7 +160,6 @@ const NewPost = ({ handleNewPost }) => {
                   onClick={() => setSelectedFilter(option.filter)}
                   className="mx-2 cursor-pointer"
                   filter={option.filter}
-
                 />
               ))}
           </div>
