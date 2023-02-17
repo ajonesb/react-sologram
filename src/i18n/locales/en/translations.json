@@ -1,0 +1,18 @@
+{
+  "load-more-button-label": "Load More",
+  "liked": "Like",
+  "not-liked": "Unlike",
+  "filter-none": "None",
+  "filter-grayscale": "Grayscale",
+  "filter-sepia": "Sephia",
+  "filter-contrast": "Contrast",
+  "filter-blur": "Blur",
+  "filter-invert":" Invert",
+  "filter-saturate": "Saturate",
+  "image-url-label": "Enter an image URL",
+  "image-description-label": "Give it a name:",
+  "filter-select-label": "Select a filter:",
+  "post-button-label": "Post Now!",
+  "processing-message": "Processing your post...",
+  "confirmation-message": "Your post has been submitted! Please refresh to view the post."
+}

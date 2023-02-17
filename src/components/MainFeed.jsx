@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const MainFeed = ({ posts, handleLike, selectedFilter }) => {
   const [localPosts, setLocalPosts] = useState(
@@ -23,8 +24,10 @@ const MainFeed = ({ posts, handleLike, selectedFilter }) => {
     handleLike(index);
   };
 
+  const { t } = useTranslation();
+
   return (
-    <div className="mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="mt-[0px] md:mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {postsToShow.map((post, index) => (
         <div
           key={index}
@@ -54,12 +57,14 @@ const MainFeed = ({ posts, handleLike, selectedFilter }) => {
                 className="text-red-600 hover:text-red-700 cursor-pointer"
                 onClick={() => handleLikeLocal(index)}
                 size="1.5em"
+                title={t("liked")}
               />
             ) : (
               <FaRegHeart
                 className="text-red-600 hover:text-red-700 cursor-pointer"
                 onClick={() => handleLikeLocal(index)}
                 size="1.5em"
+                title={t("not-liked")}
               />
             )}
           </div>
@@ -72,7 +77,7 @@ const MainFeed = ({ posts, handleLike, selectedFilter }) => {
             className="bg-indigo-600 text-white py-3 px-5 rounded-full hover:bg-indigo-700"
             onClick={handleLoadMore}
           >
-            Load More
+            {t("load-more-button-label")}
           </button>
         </div>
       )}

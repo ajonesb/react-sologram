@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const NewPost = ({ handleNewPost }) => {
   const [imageUrl, setImageUrl] = useState("");
@@ -6,8 +7,8 @@ const NewPost = ({ handleNewPost }) => {
   const [selectedFilter, setSelectedFilter] = useState("none");
   const [confirmation, setConfirmation] = useState("");
   const [loading, setLoading] = useState(false);
-
   const imagePreviewRef = useRef();
+  const { t } = useTranslation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,8 +28,9 @@ const NewPost = ({ handleNewPost }) => {
         setImageUrl("");
         setImageDescription("");
         setSelectedFilter("none");
-        // imagePreviewRef.current.style.backgroundImage = "";
-        setConfirmation("Your post has been submitted! Please refresh to view the post.");
+        setConfirmation(
+          "Your post has been submitted! Please refresh to view the post."
+        );
       } catch (error) {
         console.error("Error submitting post:", error);
       } finally {
@@ -44,25 +46,31 @@ const NewPost = ({ handleNewPost }) => {
   };
 
   const filterOptions = [
-    { name: "None", filter: "none" },
-    { name: "Grayscale", filter: "grayscale(100%)" },
-    { name: "Sepia", filter: "sepia(100%)" },
-    { name: "Contrast", filter: "contrast(150%)" },
-    { name: "Blur", filter: "blur(5px)" },
-    { name: "Invert", filter: "invert(100%)" },
-    { name: "Saturate", filter: "saturate(8)" },
+    { name: t("filter-none"), filter: "none" },
+    { name: t("filter-grayscale"), filter: "grayscale(100%)" },
+    { name: t("filter-sepia"), filter: "sepia(100%)" },
+    { name: t("filter-contrast"), filter: "contrast(150%)" },
+    { name: t("filter-blur"), filter: "blur(5px)" },
+    { name: t("filter-invert"), filter: "invert(100%)" },
+    { name: t("filter-saturate"), filter: "saturate(8)" },
   ];
 
+  console.log(t("post-button-label"));
+
   return (
-    <form onSubmit={handleSubmit} className="mt-[55px] max-w-2xl m-auto">
+    <form onSubmit={handleSubmit} className="mt-[106px] md:mt-[55px] max-w-2xl m-auto">
       {loading && (
         <div className="p-3 text-center">
-          <p className="text-indigo-500 font-medium">Processing your post...</p>
+          <p className="text-indigo-500 font-medium">
+            {t("processing-message")}
+          </p>
         </div>
       )}
       {confirmation && (
-        <div className="p-3 text-center">
-          <p className="text-emerald-600 font-medium text-md font-noto-sans font-extrabold">{confirmation}</p>
+        <div className="mt-[100px] md:mt-[0px] p-3 text-center">
+          <p className="text-emerald-600 font-medium text-md font-noto-sans font-extrabold">
+            {t("confirmation-message")}
+          </p>
         </div>
       )}
       <div className="p-1">
@@ -70,7 +78,7 @@ const NewPost = ({ handleNewPost }) => {
           className="block text-gray-400 text-sm text-center font-noto-sans font-extrabold mb-2"
           htmlFor="image-url"
         >
-          Enter an image URL
+          {t("image-url-label")}
         </label>
         <input
           id="image-url"
@@ -104,7 +112,7 @@ const NewPost = ({ handleNewPost }) => {
           className="block text-blue-700 text-center text-sm font-noto-sans font-extrabold mb-2"
           htmlFor="image-description"
         >
-          Give it a name:
+          {t("image-description-label")}
         </label>
         <input
           id="image-description"
@@ -121,7 +129,7 @@ const NewPost = ({ handleNewPost }) => {
           className="block text-gray-400 text-center font-medium font-noto-sans font-bold mb-2"
           htmlFor="filter-select"
         >
-          Select a filter:
+          {t("filter-select-label")}
         </label>
         <select
           id="filter-select"
@@ -171,7 +179,7 @@ const NewPost = ({ handleNewPost }) => {
           className="w-['60%'] bg-black hover:bg-indigo-700 text-white font-medium py-4 px-20 rounded focus:outline-none focus:shadow-outline"
           type="submit"
         >
-          Post Now!
+          {t("post-button-label")}
         </button>
       </div>
     </form>

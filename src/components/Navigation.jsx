@@ -7,6 +7,7 @@ const Navigation = ({
   setShowNewPost,
   showNewPost,
 }) => {
+
   return (
     <nav className="flex basis-full justify-between items-center max-w-[60%] m-auto">
       <button

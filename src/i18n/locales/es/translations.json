@@ -1,0 +1,18 @@
+{
+  "load-more-button-label": "Cargar más",
+  "liked": "Me gusta",
+  "not-liked": "No me gusta",
+  "filter-none": "Nada",
+  "filter-grayscale": "Escala de Grises",
+  "filter-sepia": "Sephia",
+  "filter-contrast": "Contraste",
+  "filter-blur": "Difuminar",
+  "filter-invert":" Invertir",
+  "filter-saturate": "Saturar",
+  "image-url-label": "Ingrese una URL de imagen",
+  "image-description-label": "Dale un nombre:",
+  "filter-select-label": "Selecciona un filtro:",
+  "post-button-label": "¡Publicar ahora!",
+  "processing-message": "Procesando tu publicación...",
+  "confirmation-message": "¡Tu publicación ha sido enviada! Por favor actualiza para ver la publicación."
+}
