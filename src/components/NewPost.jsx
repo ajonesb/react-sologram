@@ -25,20 +25,25 @@ const NewPost = ({ handleNewPost }) => {
       setImageDescription("");
       setSelectedFilter("none");
       imagePreviewRef.current.style.backgroundImage = "";
+      // imagePreviewRef.current.style.filter = "none";
       setConfirmation("Your post has been submitted!");
     }
   };
 
-  // const handleImageUrlChange = (event) => {
-  //   setImageUrl(event.target.value);
-  //   imagePreviewRef.current.style.backgroundImage = `url(${event.target.value})`;
-  // };
+  const handleImageUrlChange = (event) => {
+    setImageUrl(event.target.value);
+    imagePreviewRef.current.style.backgroundImage = `url(${event.target.value})`;
+    imagePreviewRef.current.style.filter = selectedFilter;
+  };
 
   const filterOptions = [
     { name: "None", filter: "none" },
     { name: "Grayscale", filter: "grayscale(100%)" },
     { name: "Sepia", filter: "sepia(100%)" },
     { name: "Contrast", filter: "contrast(150%)" },
+    { name: "Blur", filter: "blur(5px)" },
+    { name: "Invert", filter: "invert(100%)" },
+    { name: "Saturate", filter: "saturate(8)" },
   ];
 
   return (
@@ -70,9 +75,7 @@ const NewPost = ({ handleNewPost }) => {
             <div className="relative h-full w-full">
               <div
                 className="absolute top-0 left-0 h-full w-full"
-                style={{
-                  background: "black",
-                }}
+                style={{ filter: selectedFilter }}
               >
                 <img
                   src={imageUrl}
@@ -105,7 +108,9 @@ const NewPost = ({ handleNewPost }) => {
         <label
           className="block text-gray-400 text-center font-medium font-noto-sans font-bold mb-2"
           htmlFor="filter-select"
-        ></label>
+        >
+          Select a filter:
+        </label>
         <select
           id="filter-select"
           value={selectedFilter}
@@ -137,6 +142,7 @@ const NewPost = ({ handleNewPost }) => {
                         ? "4px solid blue"
                         : "none",
                     width: "107px",
+
                     height: "107px",
                   }}
                   onClick={() => setSelectedFilter(option.filter)}

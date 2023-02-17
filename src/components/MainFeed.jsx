@@ -24,11 +24,11 @@ const MainFeed = ({ posts, handleLike }) => {
   };
 
   return (
-    <div className="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {postsToShow.map((post, index) => (
         <div
           key={index}
-          className="relative bg-white p-6 rounded-lg shadow-lg"
+          className="relative bg-white rounded-lg shadow-lg"
           style={{ paddingBottom: "100%" }}
         >
           <img
@@ -38,7 +38,7 @@ const MainFeed = ({ posts, handleLike }) => {
             style={{ filter: post.filter }} // Add the style attribute to apply the filter
             onDoubleClick={() => handleLikeLocal(index)}
           />
-          <div className="bg-white text-black absolute py-2 top-0 left-6 w-full">
+          <div className="bg-white text-black absolute p-2 top-0 w-full">
             <p className="text-xl font-noto-sans font-bold">{post.title}</p>
           </div>
 
