@@ -138,3 +138,6 @@ The assumptions and interpretations you made for this test, as if this was a rea
 E.g.: design decisions, business logic decisions, data model decisions, UX decisions, etc.
 That your code is clean, understandable and you DRY
 That you've closely followed the instructions provided in this test overall
+
+## Demo
+https://react-sologram.netlify.app/
