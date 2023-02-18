@@ -27,7 +27,7 @@ const MainFeed = ({ posts, handleLike, selectedFilter }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="mt-[0px] md:mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate__animated animate__fadeIn">
+    <div className="mt-[100px] md:mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate__animated animate__fadeIn">
       {postsToShow.map((post, index) => (
         <div
           key={index}
