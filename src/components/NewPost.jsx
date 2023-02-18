@@ -40,8 +40,9 @@ const NewPost = ({ handleNewPost }) => {
   };
 
   const handleImageUrlChange = (event) => {
-    setImageUrl(event.target.value);
-    imagePreviewRef.current.style.backgroundImage = `url(${event.target.value})`;
+    const imageUrl = event.target.value;
+    setImageUrl(imageUrl);
+    imagePreviewRef.current.style.backgroundImage = `url(${imageUrl})`;
     imagePreviewRef.current.style.filter = selectedFilter;
   };
 
@@ -87,7 +88,7 @@ const NewPost = ({ handleNewPost }) => {
           id="image-url"
           type="text"
           value={imageUrl}
-          onChange={(event) => setImageUrl(event.target.value)}
+          onChange={handleImageUrlChange}
           className="bg-white appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700"
           required
         />
