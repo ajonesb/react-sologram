@@ -58,7 +58,10 @@ const NewPost = ({ handleNewPost }) => {
   console.log(t("post-button-label"));
 
   return (
-    <form onSubmit={handleSubmit} className="mt-[106px] md:mt-[55px] max-w-2xl m-auto">
+    <form
+      onSubmit={handleSubmit}
+      className="mt-[106px] md:mt-[55px] max-w-2xl m-auto"
+    >
       {loading && (
         <div className="p-3 text-center">
           <p className="text-indigo-500 font-medium">
@@ -124,35 +127,19 @@ const NewPost = ({ handleNewPost }) => {
         />
       </div>
 
-      <div className="p-1">
-        <label
-          className="block text-gray-400 text-center font-medium font-noto-sans font-bold mb-2"
-          htmlFor="filter-select"
-        >
-          {t("filter-select-label")}
-        </label>
-        <select
-          id="filter-select"
-          value={selectedFilter}
-          onChange={(event) => setSelectedFilter(event.target.value)}
-          className="bg-white appearance-none border-none text-black font-bold font-noto-sans uppercase border-gray-200 rounded w-full py-2 px-4 text-gray-700"
-        >
-          {filterOptions.map((option) => (
-            <option key={option.filter} value={option.filter}>
-              {option.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
       <div className="p-0">
-        <div className="h-[16] w-['41rem'] overflow-x-auto">
-          <div className="h-['13rem'] flex">
-            {imageUrl !== "" &&
-              imageDescription !== "" &&
-              filterOptions.map((option) => (
+        <div className="flex h-20 md:h-32 overflow-x-auto px-2">
+          {imageUrl !== "" &&
+            imageDescription !== "" &&
+            filterOptions.map((option) => (
+              <div
+                key={option.filter}
+                className="flex flex-col items-center p-2"
+              >
+                <p className="text-sm font-noto-sans font-bold">
+                  {option.name}
+                </p>
                 <img
-                  key={option.filter}
                   src={imageUrl}
                   alt={imageDescription}
                   style={{
@@ -161,16 +148,16 @@ const NewPost = ({ handleNewPost }) => {
                       option.filter === selectedFilter
                         ? "4px solid blue"
                         : "none",
-                    width: "107px",
-
-                    height: "107px",
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
                   }}
                   onClick={() => setSelectedFilter(option.filter)}
-                  className="mx-2 cursor-pointer"
+                  className="cursor-pointer"
                   filter={option.filter}
                 />
-              ))}
-          </div>
+              </div>
+            ))}
         </div>
       </div>
 

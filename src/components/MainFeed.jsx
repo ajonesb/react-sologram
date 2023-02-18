@@ -72,7 +72,7 @@ const MainFeed = ({ posts, handleLike, selectedFilter }) => {
       ))}
 
       {postsToShow.length < localPosts.length && (
-        <div className="mb-4 p-6">
+        <div className="mb-[80px] p-6">
           <button
             className="bg-indigo-600 text-white py-3 px-5 rounded-full hover:bg-indigo-700"
             onClick={handleLoadMore}
